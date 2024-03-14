@@ -1,0 +1,50 @@
+ManifestFileVersion: 0
+CRC: 3827501462
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 095f60c3cb4937c6db1cb034e6462340
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: aef1b636b07df6a2288bf158f5b1c87a
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Scenes/Particles/HitLightGreen.prefab
+- Assets/Scenes/Particles/Cone.png
+- Assets/Scenes/Particles/SparkYellow.png
+- Assets/Scenes/Particles/Cylinder/scene.prefab
+- Assets/Scenes/Particles/RingTex.tga
+- Assets/Scenes/Particles/SparkYellow.mat
+- Assets/Scenes/Particles/HitLightYellow.prefab
+- Assets/Scenes/Particles/HitLightBlue.prefab
+- Assets/Scenes/Particles/Cylinder/scene.Materials/None.asset
+- Assets/Scenes/Particles/ConeMat.mat
+- Assets/Scenes/Particles/Cylinder/scene.Meshes/Object_0.asset
+- Assets/Scenes/Particles/SparkGreen.png
+- Assets/Scenes/Particles/SparkBlue.mat
+- Assets/Scenes/Particles/SparkGreen.mat
+- Assets/Scenes/Particles/Ring.mat
+- Assets/Scenes/Particles/SparkBlue.png
+Dependencies: []

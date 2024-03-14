@@ -5,6 +5,7 @@ require "G_DamageTint.lua"
 require "G_ArrowPath.lua"
 require "G_TapEffect.lua"
 require "G_JudgeViewer.lua"
+require "G_NoteEffect.lua"
 
 --true = オン (on), false = オフ (off)
 local mode_Difficulty = true
@@ -12,6 +13,7 @@ local mode_DamageTint = true
 local mode_ArrowPath = true
 local mode_TapEffect = true
 local mode_JudgeViewer = true
+local mode_NoteEffect = true
 
 
 local UnityEngine = CS.UnityEngine
@@ -48,6 +50,10 @@ function onloaded()
 	if mode_JudgeViewer == true then
 		JudgeViewer_onloaded(WickyCanvas)
 	end
+
+	if mode_NoteEffect == true then
+		NoteEffect_onloaded()
+	end
 end
 
 function update()
@@ -66,6 +72,10 @@ function update()
 	if mode_JudgeViewer == true then
 		JudgeViewer_update()
 	end
+
+	if mode_NoteEffect == true then
+		NoteEffect_update()
+	end
 end
 
 function onHitNote(id, lane, noteType, judgeType)
@@ -75,6 +85,10 @@ function onHitNote(id, lane, noteType, judgeType)
 
 	if mode_JudgeViewer == true then
 		JudgeViewer_onHitNote(id, lane, noteType, judgeType)
+	end
+
+	if mode_NoteEffect == true then
+		NoteEffect_onHitNote(id, lane, noteType, judgeType)
 	end
 end
 

@@ -43,6 +43,7 @@ function CreateJudgeCanvas(parentCanvas, name, pos, sprite)
 	_TextCanvasText.font = FontJP
 	_TextCanvasText.fontSize = 37
 	_TextCanvasText.text = "0"
+	_TextCanvasText.horizontalOverflow = CS.UnityEngine.HorizontalWrapMode.Overflow
 
 	return _TextCanvasText
 end
@@ -89,12 +90,12 @@ function JudgeViewer_onloaded(WickyCanvas)
 	JudgementCanvas.transform.anchorMax = WGLVector2(0, 1)
 	JudgementCanvas.transform.pivot = WGLVector2(0, 1)
 
-	_JudgeBrText = CreateJudgeCanvas(JudgementCanvas, "JudgeBr", WGLVector2(200, -280), SpriteBrillant)
-	_JudgeGText = CreateJudgeCanvas(JudgementCanvas, "JudgeG", WGLVector2(200, -340), SpriteGreat)
-	_JudgeFText = CreateJudgeCanvas(JudgementCanvas, "JudgeF", WGLVector2(200, -400), SpriteFast)
-	_JudgeSText = CreateJudgeCanvas(JudgementCanvas, "JudgeS", WGLVector2(200, -460), SpriteSlow)
-	_JudgeBText = CreateJudgeCanvas(JudgementCanvas, "JudgeB", WGLVector2(200, -520), SpriteBad)
-	_JudgeMText = CreateJudgeCanvas(JudgementCanvas, "JudgeM", WGLVector2(200, -580), SpriteMiss)
+	_JudgeBrText = CreateJudgeCanvas(JudgementCanvas, "JudgeBr", WGLVector2(150, -280), SpriteBrillant)
+	_JudgeGText = CreateJudgeCanvas(JudgementCanvas, "JudgeG", WGLVector2(150, -340), SpriteGreat)
+	_JudgeFText = CreateJudgeCanvas(JudgementCanvas, "JudgeF", WGLVector2(150, -400), SpriteFast)
+	_JudgeSText = CreateJudgeCanvas(JudgementCanvas, "JudgeS", WGLVector2(150, -460), SpriteSlow)
+	_JudgeBText = CreateJudgeCanvas(JudgementCanvas, "JudgeB", WGLVector2(150, -520), SpriteBad)
+	_JudgeMText = CreateJudgeCanvas(JudgementCanvas, "JudgeM", WGLVector2(150, -580), SpriteMiss)
 end
 
 function JudgeViewer_update()
