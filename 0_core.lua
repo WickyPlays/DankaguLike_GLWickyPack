@@ -9,10 +9,10 @@ require "G_NoteEffect.lua"
 
 --true = オン (on), false = オフ (off)
 local mode_Difficulty = true
-local mode_DamageTint = true
-local mode_ArrowPath = true
-local mode_TapEffect = true
-local mode_JudgeViewer = true
+local mode_DamageTint = false
+local mode_ArrowPath = false
+local mode_TapEffect = false
+local mode_JudgeViewer = false
 local mode_NoteEffect = true
 
 

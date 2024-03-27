@@ -4,6 +4,11 @@
 local ALPHA = 0.6 --アルファ
 local MODE = "Beam01"
 
+--Supports: Red, Yellow, Orange, Green, Lime, Blue, Dark Blue, Purple, Pink, White
+local NORMAL_NOTE = "HitLightPurple"
+local LONG_NOTE = "HitLightBlue"
+local FUZZY_NOTE = "HitLightGreen"
+
 local _platform = nil
 local Vector3 = CS.UnityEngine.Vector3
 local GameObject = CS.UnityEngine.GameObject
@@ -149,9 +154,9 @@ function NoteEffect_onloaded()
 
 	EffectPoolObj = GameObject("EffectPool")
 
-	local _hitYellow = ASSETMAN:LoadGameObject(hash, "HitLightYellow")
-	local _hitGreen = ASSETMAN:LoadGameObject(hash, "HitLightGreen")
-	local _hitBlue = ASSETMAN:LoadGameObject(hash, "HitLightBlue")
+	local _hitYellow = ASSETMAN:LoadGameObject(hash, NORMAL_NOTE)
+	local _hitGreen = ASSETMAN:LoadGameObject(hash, FUZZY_NOTE)
+	local _hitBlue = ASSETMAN:LoadGameObject(hash, LONG_NOTE)
 
 	_poolY = createEffectPool(_hitYellow, 2)
 	_poolY.initializePool()
