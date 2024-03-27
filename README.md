@@ -13,7 +13,7 @@ Featuring (フィーチャリング):
 
 
 Note: Inside file 0_core.lua:
-(注意：0_coreの中に...)
+(注意：0_core.luaの中に...)
 
 ```lua
 local mode_Difficulty = true
