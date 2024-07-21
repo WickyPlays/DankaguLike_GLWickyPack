@@ -19,7 +19,7 @@ local height = SCREENMAN:GetScreenHeight()
 local FontJP = nil
 local modules = {}
 
-local LIP = nil
+local ini_parser = nil
 local parentDir = nil
 local settings = nil
 local settingsDir = nil
@@ -112,9 +112,9 @@ util.GetModules = function()
 end
 
 util.InsertSettings = function(lip, dir)
-	LIP = lip
+	ini_parser = lip
 	settingsDir = dir
-	settings = LIP.load(settingsDir)
+	settings = ini_parser.load(settingsDir)
 end
 
 util.GetSettingsModule = function()
@@ -132,8 +132,8 @@ util.SetSettings = function(module, key, value)
 end
 
 util.SaveSettings = function()
-	if not LIP then return end
-	LIP.save(settingsDir, settings)
+	if not ini_parser then return end
+	ini_parser.save(settingsDir, settings)
 end
 
 util.ColorRGB = function(r, g, b)

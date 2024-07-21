@@ -6,7 +6,7 @@ local Path = CS.System.IO.Path
 local Assembly = CS.System.Reflection.Assembly
 
 local parentDir = nil
-local LIP = require("tools\\LIP.lua")
+local ini_parser = require("tools\\ini_parser.lua")
 
 local settingsDir = nil
 local settings = nil
@@ -46,7 +46,7 @@ local function loadAllScripts()
 						settings[folderName][key] = value
 					end
 					script.SaveOption = function()
-						LIP.save(settingsDir, settings)
+						ini_parser.save(settingsDir, settings)
 					end
 					table.insert(modules, files[i])
 					table.insert(scripts, script)
@@ -70,10 +70,10 @@ function onloaded()
 
 	util = require("tools\\utils.lua")
 	settingsDir = parentDir .. "settings.ini"
-	settings = LIP.load(settingsDir);
+	settings = ini_parser.load(settingsDir);
 
 	util.InsertParentDir(parentDir)
-	util.InsertSettings(LIP, settingsDir)
+	util.InsertSettings(ini_parser, settingsDir)
 	loadAllScripts()
 
 	for i = 1, #scripts do
@@ -216,6 +216,6 @@ function ondestroy()
 	package.loaded['tools\\utils.lua'] = nil
 	_G['tools\\utils.lua'] = nil
 
-	package.loaded['tools\\LIP.lua'] = nil
-	_G['tools\\LIP.lua'] = nil
+	package.loaded['tools\\ini_parser.lua'] = nil
+	_G['tools\\ini_parser.lua'] = nil
 end
