@@ -1,0 +1,55 @@
+name: Create ZIP Release
+
+on:
+  push:
+    tags:
+      - 'release-*'
+
+jobs:
+  release:
+    permissions: write-all
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get release version
+        id: get_version
+        run: echo "version=${GITHUB_REF#refs/tags/release-}" >> $GITHUB_ENV
+
+      - name: Prepare directory structure
+        run: |
+          mkdir -p DankaguLike_GLWickyPack
+          rsync -av --exclude='DankaguLike_GLWickyPack' ./ DankaguLike_GLWickyPack/
+          # Remove unnecessary files/folders if needed
+          rm -rf DankaguLike_GLWickyPack/.git
+          rm -rf DankaguLike_GLWickyPack/.github
+
+      - name: Create zip archive
+        run: zip -r "Update ${version}.zip" DankaguLike_GLWickyPack
+
+      - name: Create GitHub release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: "Update ${version}"
+          draft: false
+          prerelease: false
+
+      - name: List files
+        run: ls -la
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "Update ${version}.zip"
+          asset_name: "Update ${version}.zip"
+          asset_content_type: application/zip
