@@ -1,6 +1,6 @@
-local LIP = {};
+local ini_parser = {};
 
-function LIP.load(fileName)
+function ini_parser.load(fileName)
 	assert(type(fileName) == 'string', 'Parameter "fileName" must be a string.');
 	local file = assert(io.open(fileName, 'r'), 'Error loading file : ' .. fileName);
 	local data = { __order = {} };
@@ -45,7 +45,7 @@ function LIP.load(fileName)
 	return data;
 end
 
-function LIP.save(fileName, data)
+function ini_parser.save(fileName, data)
 	assert(type(fileName) == 'string', 'Parameter "fileName" must be a string.');
 	assert(type(data) == 'table', 'Parameter "data" must be a table.');
 	local file = assert(io.open(fileName, 'w+b'), 'Error loading file :' .. fileName);
@@ -67,4 +67,4 @@ function LIP.save(fileName, data)
 	file:close();
 end
 
-return LIP;
+return ini_parser;
