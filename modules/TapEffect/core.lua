@@ -43,7 +43,7 @@ local function setupPool()
 	end
 
 	function ParticlePool:initializePool()
-		local WickyCanvasTE = util.CreateCanvas("WickyCanvasTE", 2)
+		WickyCanvasTE = util.CreateCanvas("WickyCanvasTE", 3)
 		for i = 1, self.maxParticles do
 			local ParticleProp = GameObject("ParticleProp")
 			ParticleProp.transform:SetParent(WickyCanvasTE.transform, false)
@@ -113,8 +113,6 @@ execute.onloaded = function()
 	_platform = APPMAN:GetPlatformInt()
 	local hash = execute.LoadAssetBundle("bundles\\" .. util.GetPlatformPath() .. "ring")
 	_ring = util.LoadObjectHash(hash, "Sparkle")
-
-	WickyCanvasTE = util.CreateCanvas("WickyCanvasTE", 2)
 
 	--Pooling
 	setupPool()
