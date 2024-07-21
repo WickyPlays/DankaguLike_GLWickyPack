@@ -1,4 +1,4 @@
-name: Create ZIP Release
+name: ZIP Release
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Get release version
         id: get_version
-        run: echo "version=${GITHUB_REF#refs/tags/release-}" >> $GITHUB_ENV
+        run:  echo "version=${GITHUB_REF#refs/tags/release-}" >> $GITHUB_OUTPUT
 
       - name: Prepare directory structure
         run: |
@@ -28,7 +28,7 @@ jobs:
           rm -rf DankaguLike_GLWickyPack/.github
 
       - name: Create zip archive
-        run: zip -r "Update ${version}.zip" DankaguLike_GLWickyPack
+        run: zip -r "Update ${GITHUB_REF#refs/tags/release-}.zip" DankaguLike_GLWickyPack
 
       - name: Create GitHub release
         id: create_release
@@ -37,7 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: "Update ${version}"
+          release_name: "Update ${{ steps.get_version.outputs.version }}"
           draft: false
           prerelease: false
 
@@ -50,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "Update ${version}.zip"
-          asset_name: "Update ${version}.zip"
+          asset_path: "Update ${{ steps.get_version.outputs.version }}.zip"
+          asset_name: "Update ${{ steps.get_version.outputs.version }}.zip"
           asset_content_type: application/zip
