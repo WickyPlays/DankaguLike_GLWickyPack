@@ -1,16 +1,19 @@
 Welcome to WickyPack for DankaguLike!!!
 
-Ver. 2.1.2
+Ver. 2.2.0
 Featuring
 
-+ Difficulty
-+ DamageTint
-+ ArrowPath
-+ TapEffect
-+ JudgeViewer
-+ NoteEffect
-+ SubtitleLyric
-+ Video
++ Difficulty (難易度)
++ DamageTint (ダメージ演出）
++ ArrowPath (矢印レーン)
++ TapEffect (タップ・エフェクト)
++ JudgeViewer (判定表示)
++ NoteEffect (ノート・エフェクト)
++ SubtitleLyric (歌詞)
++ Video (動画)
++ SongTitle (曲名)
+
+[https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
 
 Setting file: `settings.ini`
 
@@ -32,6 +35,7 @@ This is a Global Lua modpack scripts reserved for extra functionalities for Dank
 + NoteEffect: adding cool note effects whether player successfully hit notes.
 + SubtitleLyric: lyrics that are visible on the screen in the middle of gameplay from just a subtitle file (.srt) in song folder.
 + Video: video that are visible on the gameplay background if there are .mp4 file somewhere in the chart.
++ SongTitle: allows viewing song title at bottom left of screen.
 
 ## How to use
 

@@ -1,4 +1,4 @@
--- Script property of Wicky
+--著者: Wicky
 
 --=================================
 --		 MAIN SCRIPT

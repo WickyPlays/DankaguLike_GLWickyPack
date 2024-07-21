@@ -13,7 +13,7 @@ execute.active = true
 --		 MAIN SCRIPT
 --=================================
 
-local function CreateLyricCanvas(WickyCanvas, name, pos, color, text, size)
+local function CreateCanvas(WickyCanvas, name, pos, color, text, size)
 	local TextCanvas = GameObject(name)
 	TextCanvas.gameObject.transform:SetParent(WickyCanvas.transform, false)
 	TextCanvas:AddComponent(typeof(UnityEngine.CanvasRenderer))
@@ -24,49 +24,34 @@ local function CreateLyricCanvas(WickyCanvas, name, pos, color, text, size)
 	TextCanvas.transform.sizeDelta = Vector2(0, 0)
 	_TextCanvasText.font = util.GetFontJP()
 	_TextCanvasText.fontSize = size
-	_TextCanvasText.alignment = UnityEngine.TextAnchor.UpperRight
+	_TextCanvasText.alignment = UnityEngine.TextAnchor.UpperLeft
 	_TextCanvasText.text = text
 	_TextCanvasText.color = color
 end
 
 execute.onloaded = function()
-	
 	local WickyCanvas = util.GetCanvas()
 
-	local diffText = ''
+	local diffText = SONGMAN:GetTitle()
 	local diffColor = util.ColorRGB(0, 0, 0)
 	local diffType = SONGMAN:GetDifficultyToInt()
-	local diffMeter = SONGMAN:GetMeter()
-    local diffX = false
-	local size = execute.GetOption("size")
 
 	if diffType == 0 then
-		diffText = "Easy"
 		diffColor = util.ColorRGB(0, 255, 32)
 	elseif diffType == 1 then
-		diffText = "Normal"
 		diffColor = util.ColorRGB(0, 133, 255)
 	elseif diffType == 2 then
-		diffText = "Hard"
 		diffColor = util.ColorRGB(255, 235, 0)
 	elseif diffType == 3 then
-		diffText = "Extra"
 		diffColor = util.ColorRGB(255, 0, 34)
 	elseif diffType == 4 then
-		diffText = "Lunatic"
 		diffColor = util.ColorRGB(222, 0, 255)
 	end
 
-    diffX = diffMeter == 12345678
-
-    if (diffX) then
-        CreateLyricCanvas(WickyCanvas, "TextDifficultyShadow", Vector3(-33, -1002, 0), diffColor, diffText .. ' X', size)
-        CreateLyricCanvas(WickyCanvas, "TextDifficulty", Vector3(-35, -1000, 0), util.ColorRGB(255, 255, 255), diffText .. ' X', size)
-    else
-        CreateLyricCanvas(WickyCanvas, "TextDifficultyShadow", Vector3(-33, -1002, 0), diffColor, diffText .. ' ' .. diffMeter, size)
-        CreateLyricCanvas(WickyCanvas, "TextDifficulty", Vector3(-35, -1000, 0), util.ColorRGB(255, 255, 255), diffText .. ' ' .. diffMeter, size)
-    
-    end
+	CreateCanvas(WickyCanvas, "SongTitleShadow", Vector3(33, -1002, 0), diffColor,
+		diffText, execute.GetOption("size"))
+	CreateCanvas(WickyCanvas, "SongTitle", Vector3(35, -1000, 0), util.ColorRGB(255, 255, 255),
+		diffText,  execute.GetOption("size"))
 end
 
 return execute

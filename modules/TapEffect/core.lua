@@ -1,3 +1,5 @@
+--著者: Wicky
+
 local UnityEngine = CS.UnityEngine
 local GameObject = UnityEngine.GameObject
 local Vector3 = UnityEngine.Vector3
