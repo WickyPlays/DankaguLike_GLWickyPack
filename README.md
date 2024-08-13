@@ -2,7 +2,7 @@
 
 Welcome to WickyPack for DankaguLike!!!
 
-Ver. 2.2.1
+Ver. 2.3.0
 
 [https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
 

@@ -1,3 +1,3 @@
-[English | 日本語]
+[[English](README.md) | 日本語]
 
 近日公開...
