@@ -15,11 +15,9 @@ local lyrics = {}
 local function findFirstFileWithExtension(directory, extension)
   local files = Directory.GetFiles(directory, "*" .. extension)
 
-  if files[0] then
-    return files[0]
-  else
-    return nil
-  end
+  if files == nil or files.Length == 0 then return nil end
+
+  return files[0]
 end
 
 local function parseSubtitle()
