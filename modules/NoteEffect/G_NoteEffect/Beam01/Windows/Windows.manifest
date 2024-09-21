@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 624539955
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: hit
+      Dependencies: {}
