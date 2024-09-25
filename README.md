@@ -2,7 +2,7 @@
 
 Welcome to WickyPack for DankaguLike!!!
 
-Ver. 2.4.0
+Ver. 2.5.0
 
 [https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
 
@@ -18,7 +18,8 @@ This is a Global Lua modpack scripts reserved for extra functionalities for Dank
 
 ## Featuring
 
-+ Difficulty: allows viewing difficulty note at bottom right of screen
++ AudioSpectrum: allows viewing audio spectrum (visualizer) in-game.
++ Difficulty: allows viewing difficulty note at bottom right of screen.
 + DamageTint: allows visible damage tint to players when they miss notes.
 + ArrowPath: a cool moving arrow path on the lane for the flow.
 + TapEffect: a visible effect whether player taps the screen.
