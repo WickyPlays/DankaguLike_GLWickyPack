@@ -11,16 +11,15 @@ local Color = CS.UnityEngine.Color
 local WickyCanvasTE = nil
 
 local SAMPLE_NUM = 8192
-local BAR_COUNT = 30
+local BAR_COUNT = 25
 local _scale = 55
 local smoothingFactor = 0.5
 local globalMaxLevel = 0
 local maxPillarHeight = 80
 local nonLinearFactor = 0.6
-local minThreshold = 30
 local sharpness = 1
 
-local FFT_WINDOW = CS.UnityEngine.FFTWindow.Hamming
+local FFT_WINDOW = CS.UnityEngine.FFTWindow.BlackmanHarris
 local _spectrumData = {}
 
 local _nodes = {}
@@ -95,7 +94,6 @@ local function CalculateAverage(barIndex, count)
         average = average / sampleCount
     end
 
-    -- Return the calculated average and the updated count value
     return average, count
 end
 
@@ -110,6 +108,9 @@ local function ProcessCubes(isMaxLevelPass)
         -- Apply a transformation to ensure low values have a higher impact
         average = Pow(average, sharpness)
         local level = average * _scale * 0.01
+        if level < 0.03 then
+            level = 0.05
+        end
 
         if isMaxLevelPass then
             if level > maxLevel then
@@ -129,23 +130,6 @@ local function ProcessCubes(isMaxLevelPass)
             local newScaleY = Lerp(previousScale.y, level, smoothingFactor)
             maxLevel = newScaleY
             _nodes[i + 1].transform.sizeDelta = Vector2(previousScale.x, newScaleY)
-        end
-    end
-
-    -- Do not let the silent bar (found in first ones) remain silent the whole way
-    for i = 1, math.floor(BAR_COUNT / 3) do
-        local node = _nodes[i]
-        if node ~= nil then
-            local mirroredIndex = BAR_COUNT - i + 1
-            local mirrorNode = _nodes[mirroredIndex]
-    
-            local nodeY = node.transform.sizeDelta.y
-            local mirrorY = mirrorNode.transform.sizeDelta.y
-    
-            if nodeY < minThreshold then
-                local newScaleY = Lerp(nodeY, mirrorY, smoothingFactor)
-                node.transform.sizeDelta = Vector2(node.transform.sizeDelta.x, newScaleY)
-            end
         end
     end
 

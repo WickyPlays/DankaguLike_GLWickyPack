@@ -24,7 +24,7 @@ local function CreateLyricCanvas(WickyCanvas, name, pos, color, text, size)
 	TextCanvas.transform.sizeDelta = Vector2(0, 0)
 	_TextCanvasText.font = util.GetFontJP()
 	_TextCanvasText.fontSize = size
-	_TextCanvasText.alignment = UnityEngine.TextAnchor.UpperRight
+	_TextCanvasText.alignment = UnityEngine.TextAnchor.LowerRight
 	_TextCanvasText.text = text
 	_TextCanvasText.color = color
 end
@@ -60,11 +60,11 @@ execute.onloaded = function()
     diffX = diffMeter == 12345678
 
     if (diffX) then
-        CreateLyricCanvas(WickyCanvas, "TextDifficultyShadow", Vector3(-33, -1002, 0), diffColor, diffText .. ' X', size)
-        CreateLyricCanvas(WickyCanvas, "TextDifficulty", Vector3(-35, -1000, 0), util.ColorRGB(255, 255, 255), diffText .. ' X', size)
+        CreateLyricCanvas(WickyCanvas, "TextDifficultyShadow", Vector3(-15, 20, 0), diffColor, diffText .. ' X', size)
+        CreateLyricCanvas(WickyCanvas, "TextDifficulty", Vector3(-17, 22, 0), util.ColorRGB(255, 255, 255), diffText .. ' X', size)
     else
-        CreateLyricCanvas(WickyCanvas, "TextDifficultyShadow", Vector3(-33, -1002, 0), diffColor, diffText .. ' ' .. diffMeter, size)
-        CreateLyricCanvas(WickyCanvas, "TextDifficulty", Vector3(-35, -1000, 0), util.ColorRGB(255, 255, 255), diffText .. ' ' .. diffMeter, size)
+        CreateLyricCanvas(WickyCanvas, "TextDifficultyShadow", Vector3(-15, 20, 0), diffColor, diffText .. ' ' .. diffMeter, size)
+        CreateLyricCanvas(WickyCanvas, "TextDifficulty", Vector3(-17, 22, 0), util.ColorRGB(255, 255, 255), diffText .. ' ' .. diffMeter, size)
     
     end
 end

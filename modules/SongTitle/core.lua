@@ -24,7 +24,7 @@ local function CreateCanvas(WickyCanvas, name, pos, color, text, size)
 	TextCanvas.transform.sizeDelta = Vector2(0, 0)
 	_TextCanvasText.font = util.GetFontJP()
 	_TextCanvasText.fontSize = size
-	_TextCanvasText.alignment = UnityEngine.TextAnchor.UpperLeft
+	_TextCanvasText.alignment = UnityEngine.TextAnchor.LowerLeft
 	_TextCanvasText.text = text
 	_TextCanvasText.color = color
 end
@@ -48,9 +48,9 @@ execute.onloaded = function()
 		diffColor = util.ColorRGB(222, 0, 255)
 	end
 
-	CreateCanvas(WickyCanvas, "SongTitleShadow", Vector3(33, -1002, 0), diffColor,
+	CreateCanvas(WickyCanvas, "SongTitleShadow", Vector3(15, 20, 0), diffColor,
 		diffText, execute.GetOption("size"))
-	CreateCanvas(WickyCanvas, "SongTitle", Vector3(35, -1000, 0), util.ColorRGB(255, 255, 255),
+	CreateCanvas(WickyCanvas, "SongTitle", Vector3(17, 22, 0), util.ColorRGB(255, 255, 255),
 		diffText,  execute.GetOption("size"))
 end
 
