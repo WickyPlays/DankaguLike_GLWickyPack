@@ -63,9 +63,9 @@ function onloaded()
 	local platform = APPMAN:GetPlatformInt()
 
 	if platform == 3 or platform == 4 then
-		parentDir = CS.UnityEngine.Application.persistentDataPath .. "/GlobalLua/DankaguLike_GLWickyPack/"
+		parentDir = CS.ExternalDirectory.GlobalLuaPath .. "/DankaguLike_GLWickyPack/"
 	else
-		parentDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) .. "\\GlobalLua\\DankaguLike_GLWickyPack\\"
+		parentDir = CS.ExternalDirectory.GlobalLuaPath .. "\\DankaguLike_GLWickyPack\\"
 	end
 
 	util = require("tools\\utils.lua")
