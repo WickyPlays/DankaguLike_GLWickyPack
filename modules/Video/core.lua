@@ -26,6 +26,7 @@ local function startVideo()
 	vidCanvas:SetScreenMatchMode(1)
 	vidCanvas:SetBrightness(execute.GetOption("brightness"))
 	vidCanvas:Play()
+	vidCanvas:GetVideoPlayer().skipOnDrop = true
 
 	--Add black BG behind for bigger phone screen
 
