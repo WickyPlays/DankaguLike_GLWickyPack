@@ -28,6 +28,17 @@ local BossBarMarkerDivision = 1
 local SpriteColorTween = {}
 SpriteColorTween.__index = SpriteColorTween
 
+--Check if the chart has any attack notes
+local function HasAttackNotes()
+    local notes = GAMESTATE:GetNotes()
+    for i = 0, notes.Length - 1 do
+        if notes[i].IsAttack then
+            return true
+        end
+    end
+    return false
+end
+
 --Grab first img file with [BOSS] on it
 local function findFirstBossFile()
     local files = Directory.GetFiles(SONGMAN:GetSongDir(), "*[BOSS]*")
