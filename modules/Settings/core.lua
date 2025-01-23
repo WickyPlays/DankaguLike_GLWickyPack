@@ -90,13 +90,12 @@ local function RenderSettings()
 
   for i, v in ipairs(modules) do
     local isEnabled = util.GetSettings(v, "enable") == 1
-    local enabledText = isEnabled and "On" or "Off"
 
     local pos = Vector2((i - 1) * buttonSpacing - (#modules - 1) * buttonSpacing / 1.95, 0)
     local modeBtn -- Declare modeBtn here to make it accessible inside the function
 
     modeBtn = CreateButton(v, pos, defaultBtnSize, Color(1, 1, 1, 0),
-      { text = v .. ": " .. enabledText, color = Color(0, 0, 0, 1), size = fontSize },
+      { text = v, color = Color(0, 0, 0, 1), size = fontSize },
       isEnabled and btnOkSprite or btnSprite,
       function()
         local currentState = util.GetSettings(v, "enable")
@@ -104,7 +103,7 @@ local function RenderSettings()
         util.SetSettings(v, "enable", newState)
 
         if modeBtn and modeBtn.buttonText and modeBtn.buttonImage then
-          modeBtn.buttonText.text = v .. ": " .. (newState == 1 and "On" or "Off")
+          modeBtn.buttonText.text = v
           modeBtn.buttonImage.sprite = newState == 1 and btnOkSprite or btnSprite
         end
 
