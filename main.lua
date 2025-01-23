@@ -77,6 +77,9 @@ function onloaded()
 	loadAllScripts()
 
 	for i = 1, #scripts do
+		scripts[i].GetModulePath = function()
+			return modules[i]
+		end
 		scripts[i].LoadTexture = function(asset)
 			return UTIL:LoadTexture(modules[i] .. "\\" .. asset)
 		end

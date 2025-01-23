@@ -1,0 +1,94 @@
+ManifestFileVersion: 0
+CRC: 3231900702
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d58b812b4c0e5ce118a0001446703247
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f0b24d202d844a5ca7899bb2573e235
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: d58b812b4c0e5ce118a0001446703247
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7220717ed1c558d696f0a4c433080287, type: 3}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Trails/DKLikeNote2/CFX_T_Ripple.png
+- Assets/Trails/HitNoteYellow/notes/HitNoteBlueFuzzyHold.prefab
+- Assets/Trails/DKLikeNote2/verticalglow3.png
+- Assets/Trails/HitNoteYellow/notes/HitNoteYellowFuzzy.prefab
+- Assets/Trails/HitNoteYellow/NoteRingMat.mat
+- Assets/Trails/DKLikeNote2/JudgeEffect_Type2.prefab
+- Assets/Trails/HitNoteYellow/Circle.png
+- Assets/Trails/DKLikeNote2/BlueStar.png
+- Assets/Trails/HitNoteYellow/BlueStar.png
+- Assets/Trails/DKLikeNote2/LightParticle.mat
+- Assets/Trails/HitNoteYellow/Flash.png
+- Assets/Trails/HitNoteYellow/GreenStar.png
+- Assets/Trails/DKLikeNote2/GreenStar.png
+- Assets/Trails/DKLikeNote2/OrangeStarMat.mat
+- Assets/Trails/HitNoteYellow/NoteRingBaseBlur.png
+- Assets/Trails/HitNoteYellow/GreenStarMat.mat
+- Assets/Trails/HitNoteYellow/notes/HitNoteBlueHold.prefab
+- Assets/Trails/HitNoteYellow/notes/HitNoteBlueTap.prefab
+- Assets/Trails/DKLikeNote2/modular_aura06(Modular).mat
+- Assets/Trails/DKLikeNote2/aura02.png
+- Assets/Trails/DKLikeNote2/CFX_Ripple_AddSoft.mat
+- Assets/Trails/DKLikeNote2/NoteEffectDKLike2B.prefab
+- Assets/Trails/HitNoteYellow/HitNoteBlue.prefab
+- Assets/Trails/DKLikeNote2/NoteEffectDKLike2G.prefab
+- Assets/Trails/DKLikeNote2/NoteEffectDKLike2HB.prefab
+- Assets/Trails/HitNoteYellow/notes/HitNoteGreenFuzzy.prefab
+- Assets/Trails/DKLikeNote2/GreenStarMat.mat
+- Assets/Trails/DKLikeNote2/VisibleHold.prefab
+- Assets/Trails/HitNoteYellow/DiamondMat.mat
+- Assets/Trails/HitNoteYellow/RingFade.png
+- Assets/Trails/HitNoteYellow/notes/HitNoteGreenFuzzyHold.prefab
+- Assets/Trails/DKLikeNote2/light_particle.png
+- Assets/Trails/DKLikeNote2/NoteEffectDKLike2HG.prefab
+- Assets/Trails/DKLikeNote2/OrangeStar 1.png
+- Assets/Trails/HitNoteYellow/CircleMat.mat
+- Assets/Trails/HitNoteYellow/FlashMat.mat
+- Assets/Trails/HitNoteYellow/notes/HitNoteYellowFuzzyHold.prefab
+- Assets/Trails/DKLikeNote2/CFX3_HollowCircle ADD.mat
+- Assets/Trails/DKLikeNote2/verticalglowline3(Modular).mat
+- Assets/Trails/HitNoteYellow/notes/HitNoteGreenHold.prefab
+- Assets/Trails/HitNoteYellow/notes/HitNoteBlueFuzzy.prefab
+- Assets/Trails/HitNoteYellow/NoteRing.png
+- Assets/Trails/HitNoteYellow/YellowStarMat.mat
+- Assets/Trails/HitNoteYellow/notes/HitNoteYellowTap.prefab
+- Assets/Trails/HitNoteYellow/BlueStarMat.mat
+- Assets/Trails/DKLikeNote2/CFX3_T_HollowCircle.png
+- Assets/Trails/HitNoteYellow/NoteDiamond 1.png
+- Assets/Trails/HitNoteYellow/NoteRingBaseBlurMat.mat
+- Assets/Trails/HitNoteYellow/notes/HitNoteYellowHold.prefab
+- Assets/Trails/HitNoteYellow/YellowStar.png
+- Assets/Trails/DKLikeNote2/NoteEffectDKLike2Y.prefab
+- Assets/Trails/HitNoteYellow/notes/HitNoteGreenTap.prefab
+- Assets/Trails/DKLikeNote2/BlueStarMat.mat
+Dependencies: []
