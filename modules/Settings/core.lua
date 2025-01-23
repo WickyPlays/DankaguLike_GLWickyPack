@@ -17,15 +17,23 @@ local GraphicRaycaster = UnityEngine.UI.GraphicRaycaster
 local SettingsCanvas = nil
 local ModeButtons = nil
 
+local btnSprite, btnOkSprite
 local defaultBtnSize = Vector2(400, 15)
+local buttonSpacing = 400
 
-local CreateButton = function(name, pos, size, color, text, sprite, clickListener)
-  if SettingsCanvas == nil then return end
-  local buttonObject = UnityEngine.GameObject(name)
-  buttonObject:AddComponent(typeof(UnityEngine.RectTransform))
-  buttonObject:AddComponent(typeof(UnityEngine.CanvasRenderer))
-  local button = buttonObject:AddComponent(typeof(Button))
-  local buttonImage = buttonObject:AddComponent(typeof(Image))
+-- Helper function to initialize and add components to GameObjects
+local function AddComponent(gameObject, componentType)
+  return gameObject:AddComponent(typeof(componentType))
+end
+
+local function CreateButton(name, pos, size, color, text, sprite, clickListener)
+  if not SettingsCanvas then return end
+
+  local buttonObject = GameObject(name)
+  AddComponent(buttonObject, UnityEngine.RectTransform)
+  AddComponent(buttonObject, UnityEngine.CanvasRenderer)
+  local button = AddComponent(buttonObject, Button)
+  local buttonImage = AddComponent(buttonObject, Image)
 
   buttonObject.transform:SetParent(SettingsCanvas.transform, false)
 
@@ -35,11 +43,17 @@ local CreateButton = function(name, pos, size, color, text, sprite, clickListene
   buttonImage.color = color or UnityEngine.Color.white
   button.targetGraphic = buttonImage
 
-  local buttonText = nil
+  local btnImg = GameObject(name .. "Image")
+  btnImg.transform:SetParent(buttonObject.transform, false)
+  local btnImage = AddComponent(btnImg, Image)
+  btnImage.sprite = sprite or btnSprite
+  btnImg.transform.sizeDelta = Vector2(350, 100)
+
+  local buttonText
   if text then
-    local Label = GameObject(name .. "Label")
-    Label.transform:SetParent(buttonObject.transform, false)
-    buttonText = Label:AddComponent(typeof(Text))
+    local label = GameObject(name .. "Label")
+    label.transform:SetParent(btnImg.transform, false)
+    buttonText = AddComponent(label, Text)
     buttonText.text = text.text
     buttonText.font = util.GetFontJP()
     buttonText.fontSize = text.size
@@ -55,145 +69,110 @@ local CreateButton = function(name, pos, size, color, text, sprite, clickListene
   return {
     button = button,
     buttonObject = buttonObject,
-    buttonImage = buttonImage,
+    buttonImage = btnImage,
     buttonText = buttonText
   }
 end
 
-local pageIndex = 1
 local modules = {}
-local xSide = -500
-local xMid = 0
-local y1 = -380
-local y2 = -450
-local optionPos = {
-  {
-    pos = Vector2(xSide, y1),
-    size = defaultBtnSize
-  },
-  {
-    pos = Vector2(xMid, y1),
-    size = defaultBtnSize
-  },
-  {
-    pos = Vector2(-xSide, y1),
-    size = defaultBtnSize
-  },
-  {
-    pos = Vector2(xSide, y2),
-    size = defaultBtnSize
-  },
-  {
-    pos = Vector2(xMid, y2),
-    size = defaultBtnSize
-  },
-  {
-    pos = Vector2(-xSide, y2),
-    size = defaultBtnSize
-  }
-}
 
-local GetModules = function()
-  local newModules = {}
-  local startIndex = (pageIndex - 1) * 6 + 1
-  local endIndex = startIndex + 6
+local function RenderSettings()
+  if not SettingsCanvas then return end
 
-  for i = startIndex, endIndex - 1 do
-    if modules[i] then
-      table.insert(newModules, modules[i])
-    end
-  end
-
-  return newModules
-end
-
-local RenderSettings = function()
-  if SettingsCanvas == nil then return end
-  if ModeButtons ~= nil then 
+  if ModeButtons then
     GameObject.Destroy(ModeButtons)
   end
 
   ModeButtons = GameObject("ModeButtons")
   ModeButtons.transform:SetParent(SettingsCanvas.transform, false)
-  
-  local fontSize = 30
-  if util.GetScreenWidth() < 1024 then
-    fontSize = 27
-  end
 
-  for i, v in pairs(GetModules()) do
+  local fontSize = util.GetScreenWidth() < 1024 and 27 or 30
 
-    local enabledText = "Off"
-    if util.GetSettings(v, "enable") == 1 then
-      enabledText = "On"
-    end
+  for i, v in ipairs(modules) do
+    local isEnabled = util.GetSettings(v, "enable") == 1
+    local enabledText = isEnabled and "On" or "Off"
 
-    local modeBtn = CreateButton(v, optionPos[i].pos,
-      optionPos[i].size,
-      Color(1, 1, 1, 0), { text = v .. ": " .. enabledText, color = Color(1, 1, 1, 1), size = fontSize }, nil, nil)
+    local pos = Vector2((i - 1) * buttonSpacing - (#modules - 1) * buttonSpacing / 1.95, 0)
+    local modeBtn -- Declare modeBtn here to make it accessible inside the function
+
+    modeBtn = CreateButton(v, pos, defaultBtnSize, Color(1, 1, 1, 0),
+      { text = v .. ": " .. enabledText, color = Color(0, 0, 0, 1), size = fontSize },
+      isEnabled and btnOkSprite or btnSprite,
+      function()
+        local currentState = util.GetSettings(v, "enable")
+        local newState = 1 - currentState
+        util.SetSettings(v, "enable", newState)
+
+        if modeBtn and modeBtn.buttonText and modeBtn.buttonImage then
+          modeBtn.buttonText.text = v .. ": " .. (newState == 1 and "On" or "Off")
+          modeBtn.buttonImage.sprite = newState == 1 and btnOkSprite or btnSprite
+        end
+
+        util.SaveSettings()
+      end)
 
     if modeBtn then
       modeBtn.buttonObject.transform:SetParent(ModeButtons.transform, false)
-      modeBtn.button.onClick:AddListener(function()
-        if util.GetSettings(v, "enable") == 1 then
-          util.SetSettings(v, "enable", 0)
-          modeBtn.buttonText.text = v .. ": Off"
-        else
-          util.SetSettings(v, "enable", 1)
-          modeBtn.buttonText.text = v .. ": On"
-        end
-        util.SaveSettings()
-      end)
     end
   end
 end
 
-local SwitchPage = function(delta)
-  pageIndex = pageIndex + delta
+execute.onloaded = function()
+  local spriteObj = CS.UnityEngine.Resources.FindObjectsOfTypeAll(typeof(UnityEngine.Sprite))
 
-  local maxPageIndex = math.ceil(#modules / 6)
-  if pageIndex < 1 then
-    pageIndex = maxPageIndex
-  elseif pageIndex > maxPageIndex then
-    pageIndex = 1
+  for i = 0, spriteObj.Length - 1 do
+    if spriteObj[i].name == "white_design_button" then
+      btnSprite = spriteObj[i]
+    elseif spriteObj[i].name == "ok_button" then
+      btnOkSprite = spriteObj[i]
+    end
   end
 
-  RenderSettings()
-end
-
-execute.onloaded = function()
   modules = util.GetModules()
   SettingsCanvas = util.CreateCanvas("WSettingsCanvas", 1)
   local canvasComp = SettingsCanvas:GetComponent(typeof(Canvas))
   canvasComp.renderMode = UnityEngine.RenderMode.ScreenSpaceOverlay
   canvasComp.sortingOrder = 50
-  SettingsCanvas:AddComponent(typeof(GraphicRaycaster))
+  AddComponent(SettingsCanvas, GraphicRaycaster)
 
-  local Panel = GameObject("Panel")
-  Panel.transform:SetParent(SettingsCanvas.transform, false)
-  local RawImage = Panel:AddComponent(typeof(RawImage))
-  RawImage.transform.anchorMin = Vector2(0.05, 0)
-  RawImage.transform.anchorMax = Vector2(0.95, 0.2)
-  RawImage.transform.anchoredPosition = Vector2(0, 0)
-  RawImage.transform.sizeDelta = Vector2(0, 0)
-  RawImage.color = util.ColorRGBA(0, 0, 0, 0.8)
+  local panel = GameObject("SettingsPanel")
+  panel.transform:SetParent(SettingsCanvas.transform, false)
+  local panelRawImage = AddComponent(panel, RawImage)
+  panelRawImage.transform.anchorMin = Vector2(0, 0)
+  panelRawImage.transform.anchorMax = Vector2(1, 0.22)
+  panelRawImage.transform.anchoredPosition = Vector2(0, 0)
+  panelRawImage.transform.sizeDelta = Vector2(0, 0)
+  panelRawImage.color = util.ColorRGBA(0, 0, 0, 0.6)
 
-  CreateButton("PreviousButton", Vector2(xSide - 200, (y1 + y2) / 2), Vector2(50, 50),
-    Color(1, 1, 1, 0), { text = "<", color = Color(1, 1, 1, 1), size = 40 }, nil,
-    function()
-      SwitchPage(-1)
-    end
-  )
-
-  CreateButton("NextButton", Vector2(-xSide + 200, (y1 + y2) / 2), Vector2(50, 50),
-    Color(1, 1, 1, 0), { text = ">", color = Color(1, 1, 1, 1), size = 40 }, nil,
-    function()
-      SwitchPage(1)
-    end
-  )
+  local title = GameObject("Title")
+  title.transform:SetParent(SettingsCanvas.transform, false)
+  local titleText = AddComponent(title, Text)
+  titleText.text = "WickyPack 3.0.0 - Settings"
+  titleText.font = util.GetFontJP()
+  titleText.fontSize = 30
+  titleText.alignment = UnityEngine.TextAnchor.MiddleCenter
+  titleText.color = Color(1, 1, 1, 1)
+  titleText.horizontalOverflow = CS.UnityEngine.HorizontalWrapMode.Overflow
+  title.transform.anchoredPosition = Vector2(0, -340)
 
   RenderSettings()
 
+  local scrollView = GameObject("ScrollView")
+  scrollView.transform:SetParent(SettingsCanvas.transform, false)
+  local scrollRect = AddComponent(scrollView, UnityEngine.UI.ScrollRect)
+  scrollRect.transform.anchorMin = Vector2(0.1, 0)
+  scrollRect.transform.anchorMax = Vector2(0.9, 0.22)
+  scrollRect.transform.anchoredPosition = Vector2(0, 0)
+  scrollRect.transform.sizeDelta = Vector2(0, 0)
+  scrollRect.vertical = false
+  scrollRect.viewport = panel.transform
+
+  ModeButtons.transform:SetParent(scrollView.transform, false)
+  AddComponent(ModeButtons, GraphicRaycaster)
+  ModeButtons.transform.sizeDelta = Vector2(#modules * defaultBtnSize.x + buttonSpacing / 2, 100)
+
+  scrollRect.content = ModeButtons.transform
+  scrollRect.normalizedPosition = Vector2(0, 0.5)
   SettingsCanvas.gameObject:SetActive(false)
 end
 
