@@ -51,11 +51,8 @@ local function CreateBars(targetBarNodes, targetCanvas, isRightSide)
         barImage.color = Color(1, 1, 1, 0.3)
         barImage.transform.pivot = Vector2(0, 0)
 
-        local xOffset = isRightSide and
-            (musicTimePanel.transform.localPosition.x + musicTimePanel.transform.sizeDelta.x / 2.5) or
-            (musicTimePanel.transform.localPosition.x - musicTimePanel.transform.sizeDelta.x / 2)
-
-        barImage.transform.anchoredPosition = Vector2(xOffset, yPosition)
+        barImage.transform.anchoredPosition = Vector2(
+            (musicTimePanel.transform.localPosition.x - musicTimePanel.transform.sizeDelta.x / 2), yPosition)
         barImage.transform.localScale = Vector3(1, 1 * BAR_GAP, 1)
         barImage.transform.sizeDelta = Vector2(0, barHeight)
 
@@ -186,10 +183,13 @@ execute.update = function()
     end
 
     visualizationCanvas.transform.localPosition = Vector3(0, 0, 0)
-    visualizationCanvas.transform.pivot = Vector2(0.895, 0.5)
+    visualizationCanvas.transform.pivot = Vector2(0.5, 0.5)
+    visualizationCanvas.transform.anchoredPosition = Vector2(300, visualizationCanvas.transform.anchoredPosition.y)
 
     rightVisualizationCanvas.transform.localPosition = Vector3(0, 0, 0)
-    rightVisualizationCanvas.transform.pivot = Vector2(1.175, 0.5)
+    rightVisualizationCanvas.transform.pivot = Vector2(0.5, 0.5)
+    rightVisualizationCanvas.transform.anchoredPosition = Vector2(1800,
+    rightVisualizationCanvas.transform.anchoredPosition.y)
 
     local maxAmplitude = UpdateBars(true, barNodes)
     globalMaxAmplitude = Interpolate(globalMaxAmplitude, maxAmplitude, SMOOTHING_FACTOR)
