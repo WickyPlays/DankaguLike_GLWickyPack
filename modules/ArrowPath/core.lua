@@ -1,13 +1,10 @@
 --著者: Wicky
 
---=================================
---		 MAIN SCRIPT
---=================================
-
+local _json = require("tools/dkjson.lua")
 local execute = {}
 execute.active = true
 
-local opacity = 0.1 --透明度
+local opacity = 0
 
 local UnityEngine = CS.UnityEngine
 local MeshRenderer = UnityEngine.MeshRenderer
@@ -18,6 +15,7 @@ local BeatBarObjPool = nil
 local _ArrowTexture = nil
 local _ArrowSprite = nil
 local _padSpriteObj = nil
+local GameSpeed = 1 -- Default speed
 
 local function KeepBeatBar()
 	if BeatBarObjPool then
@@ -33,13 +31,22 @@ end
 
 local function Pad_PlayAnimation()
 	if not _padSpriteObj then return end
-	_padSpriteObj.transform.localPosition = _padSpriteObj.transform.localPosition - Vector3(0, 0, 0.01)
+	-- Adjust movement by GameSpeed
+	_padSpriteObj.transform.localPosition = _padSpriteObj.transform.localPosition - Vector3(0, 0, 0.01 * GameSpeed)
 	if _padSpriteObj.transform.localPosition.z <= 2.12 then
 		_padSpriteObj.transform.localPosition = Vector3(0, 0, 5)
 	end
 end
 
 execute.onloaded = function()
+	opacity = execute.GetOption("opacity")
+	local optionsJson = PLAYERSTATS:GetNotesOptionsJson()
+	local noteOptions = _json.decode(optionsJson, 1, 0)
+
+	-- DANGER: VERY FAST
+	-- GameSpeed = noteOptions.HiSpeed * 3 
+	GameSpeed = noteOptions.HiSpeed * 2
+
 	BeatBarObjPool = GameObject.Find("BeatBarObjectPool")
 
 	_ArrowTexture = execute.LoadTexture("ArrowSprite.png")
