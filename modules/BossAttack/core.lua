@@ -8,6 +8,7 @@ local Color = CS.UnityEngine.Color
 local Time = CS.UnityEngine.Time
 local GameObject = CS.UnityEngine.GameObject
 
+local enabled = true
 local MusicTimePanel = nil
 local TintBar = nil
 local colorTween1 = nil
@@ -90,6 +91,11 @@ local function GetPlatformPath()
 end
 
 execute.onloaded = function()
+    if not HasAttackNotes() then
+        enabled = false
+        return
+    end
+
     local platform = GetPlatformPath()
     local hash = ASSETMAN:LoadAssetBundle(execute.GetModulePath() .. "/modules/" .. platform .. "/flame")
     _BossDmgEffectPrefab = ASSETMAN:LoadGameObject(hash, "FlameParticle")
@@ -322,6 +328,8 @@ local function ShakeBar()
 end
 
 execute.onHitNote = function(id, lane, noteType, judgeType, isAttack)
+    if not enabled then return end
+    
     if isAttack then
         queueAttack(id, lane, noteType, judgeType, isAttack)
     end
@@ -331,6 +339,8 @@ local bounceMirror = false
 local bounceDebounce = false
 
 execute.update = function()
+    if not enabled then return end
+
     if colorTween1 ~= nil then
         colorTween1:Update()
     end

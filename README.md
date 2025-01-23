@@ -2,7 +2,7 @@
 
 Welcome to WickyPack for DankaguLike!!!
 
-Ver. 2.5.1a
+Version 3.0.0
 
 [https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
 
@@ -19,6 +19,7 @@ This is a Global Lua modpack scripts reserved for extra functionalities for Dank
 ## Featuring
 
 + AudioSpectrum: allows viewing audio spectrum (visualizer) in-game.
++ BossAttack: a cool boss attack health bar appear upon any charts with attack notes.
 + Difficulty: allows viewing difficulty note at bottom right of screen.
 + DamageTint: allows visible damage tint to players when they miss notes.
 + ArrowPath: a cool moving arrow path on the lane for the flow.
