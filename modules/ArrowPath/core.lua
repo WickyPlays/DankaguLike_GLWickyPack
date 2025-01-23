@@ -44,8 +44,8 @@ execute.onloaded = function()
 	local noteOptions = _json.decode(optionsJson, 1, 0)
 
 	-- DANGER: VERY FAST
-	-- GameSpeed = noteOptions.HiSpeed * 3 
-	GameSpeed = noteOptions.HiSpeed * 2
+	-- GameSpeed = noteOptions.HiSpeed * 2
+	GameSpeed = noteOptions.HiSpeed * 1
 
 	BeatBarObjPool = GameObject.Find("BeatBarObjectPool")
 
