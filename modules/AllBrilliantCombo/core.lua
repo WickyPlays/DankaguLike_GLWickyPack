@@ -35,7 +35,6 @@ execute.update = function()
 
   time = time + UnityEngine.Time.deltaTime * 5 -- Speed multiplier
 
-  -- Define the colors in the gradient cycle
   local colors = {
     util.ColorRGBA(245, 0, 0, 255), -- Red
     util.ColorRGBA(255, 206, 0, 255), -- Yellow
