@@ -18,18 +18,20 @@ This is a Global Lua modpack scripts reserved for extra functionalities for Dank
 
 ## Featuring
 
++ AllBrilliantCombo: the Combo text being in rainbow animation until All Brilliant combo breaks.
++ ArrowPath: a cool moving arrow animation that runs in the lane zone.
 + AudioSpectrum: allows viewing audio spectrum (visualizer) in-game.
 + BossAttack: a cool boss attack health bar appear upon any charts with attack notes.
-+ Difficulty: allows viewing difficulty note at bottom right of screen.
 + DamageTint: allows visible damage tint to players when they miss notes.
-+ ArrowPath: a cool moving arrow path on the lane for the flow.
-+ TapEffect: a visible effect whether player taps the screen.
++ Difficulty: allows viewing difficulty note at bottom right of screen.
 + JudgeViewer: allows users to view note judgements (Brillant, Great, Good, Bad, Miss) directly in the gameplay rather than result screen.
 + NoteEffect: adding cool note effects whether player successfully hit notes.
 + NoteMissVibration: allow phone vibration upon missing a note.
-+ SubtitleLyric: lyrics that are visible on the screen in the middle of gameplay from just a subtitle file (.srt) in song folder.
-+ Video: video that are visible on the gameplay background if there are .mp4 file somewhere in the chart.
 + SongTitle: allows viewing song title at bottom left of screen.
++ SubtitleLyric: lyrics that are visible on the screen in the middle of gameplay from just a subtitle file (.srt) in song folder.
++ TapEffect: a visible effect whether player taps the screen.
++ Tilt: allows gameplay zone to be tilted on lane interaction.
++ Video: video that are visible on the gameplay background if there are .mp4 file somewhere in the chart.
 
 ## How to use
 
