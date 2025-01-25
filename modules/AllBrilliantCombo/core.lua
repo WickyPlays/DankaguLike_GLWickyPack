@@ -10,12 +10,14 @@ local isAllBrillant = true
 local ComboTextTMP = nil
 local ComboLabelTMP = nil
 local time = 0
+local animationSpeed = 3
 
 execute.onloaded = function()
   local ComboText = GameObject.Find("CameraCanvas/ComboView/Panel/ComboText (TMP)")
-  local ComboLabel = GameObject.Find("CameraCanvas/ComboView/Panel/ComboLabel (TMP)")
   ComboTextTMP = ComboText:GetComponent(typeof(CS.TMPro.TextMeshProUGUI))
-  ComboLabelTMP = ComboLabel:GetComponent(typeof(CS.TMPro.TextMeshProUGUI))
+  -- ComboLabelTMP = ComboLabel:GetComponent(typeof(CS.TMPro.TextMeshProUGUI))
+
+  animationSpeed = execute.GetOption("speed")
 end
 
 execute.update = function()
@@ -33,12 +35,12 @@ execute.update = function()
     return
   end
 
-  time = time + UnityEngine.Time.deltaTime * 5 -- Speed multiplier
+  time = time + UnityEngine.Time.deltaTime * animationSpeed
 
   local colors = {
     util.ColorRGBA(245, 0, 0, 255), -- Red
-    util.ColorRGBA(255, 206, 0, 255), -- Yellow
-    util.ColorRGBA(0, 175, 22, 255), -- Green
+    util.ColorRGBA(255, 173, 0, 255), -- Yellow
+    util.ColorRGBA(17, 145, 0, 255), -- Green
     util.ColorRGBA(0, 171, 255, 255), -- Blue
     util.ColorRGBA(139, 0, 255, 255) -- Purple
   }

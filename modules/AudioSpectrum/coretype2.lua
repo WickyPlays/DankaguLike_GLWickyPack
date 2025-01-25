@@ -3,6 +3,8 @@
 local execute = {}
 execute.active = true
 
+local WIDTH = util.GetScreenWidth()
+local HEIGHT = util.GetScreenHeight()
 local UnityEngine = CS.UnityEngine
 local GameObject = CS.UnityEngine.GameObject
 local Vector3 = CS.UnityEngine.Vector3
@@ -13,7 +15,7 @@ local visualizationCanvas = nil
 local rightVisualizationCanvas = nil
 
 local SAMPLE_COUNT = 8192
-local BAR_COUNT = 50
+local BAR_COUNT = 30
 local SCALE_FACTOR = 65
 local SMOOTHING_FACTOR = 0.5
 local globalMaxAmplitude = 0
@@ -28,22 +30,17 @@ local barNodes = {}
 local rightBarNodes = {}
 
 local BAR_GAP = 0.8
-local UI_Y_MIN = -1080 / 2
-local UI_Y_MAX = 1080 / 2
+local UI_Y_MIN = -HEIGHT / 2
+local UI_Y_MAX = HEIGHT / 2
 
-local function CreateBars(targetBarNodes, targetCanvas, isRightSide)
+local canvasContainer = nil
+
+local function CreateBars(targetBarNodes, targetCanvas)
     local totalHeight = UI_Y_MAX - UI_Y_MIN
     local barHeight = totalHeight / BAR_COUNT
 
-    local musicTimePanel = GameObject.Find("MusicTimePanel")
-
     for i = 1, BAR_COUNT do
-        local yPosition
-        if isRightSide then
-            yPosition = UI_Y_MAX - ((BAR_COUNT - (i - 1)) * barHeight)
-        else
-            yPosition = UI_Y_MAX - (i * barHeight)
-        end
+        local yPosition = UI_Y_MAX - (i * barHeight)
 
         local barNode = GameObject("BarNode")
         barNode.transform:SetParent(targetCanvas.transform, false)
@@ -51,8 +48,7 @@ local function CreateBars(targetBarNodes, targetCanvas, isRightSide)
         barImage.color = Color(1, 1, 1, 0.3)
         barImage.transform.pivot = Vector2(0, 0)
 
-        barImage.transform.anchoredPosition = Vector2(
-            (musicTimePanel.transform.localPosition.x - musicTimePanel.transform.sizeDelta.x / 2), yPosition)
+        barImage.transform.anchoredPosition = Vector2(0, yPosition)
         barImage.transform.localScale = Vector3(1, 1 * BAR_GAP, 1)
         barImage.transform.sizeDelta = Vector2(0, barHeight)
 
@@ -138,13 +134,26 @@ local function UpdateBars(isMaxAmplitudePass, targetBarNodes)
     return maxAmplitude
 end
 
-execute.onloaded = function()
-    if util.IsPlatformMobile() then
-        UI_Y_MIN = -250
-        UI_Y_MAX = 250
-    end
+local function CreateRightSideCanvas()
+    -- Create right-side visualization canvas
+    rightVisualizationCanvas = util.CreateCanvas("WickyCanvasASRight", 5)
+    rightVisualizationCanvas.transform:SetParent(canvasContainer.transform, false)
 
-    local canvasContainer = util.CreateCanvas("WickyCanvasASContainer", 5)
+    local rightCanvasC = rightVisualizationCanvas:GetComponent(typeof(UnityEngine.Canvas))
+    rightCanvasC.renderMode = CS.UnityEngine.RenderMode.ScreenSpaceOverlay
+
+    -- Flip the canvas 180 degrees and position it to the right of the screen
+    rightVisualizationCanvas.transform.eulerAngles = Vector3(0, 0, 180)
+    rightVisualizationCanvas.transform.localScale = Vector3(1, 1, 1)
+
+    -- Initialize bars for the right canvas
+    CreateBars(rightBarNodes, rightVisualizationCanvas)
+end
+
+execute.onloaded = function()
+    canvasContainer = util.CreateCanvas("WickyCanvasASContainer", 5)
+    local canvasContainerScale = canvasContainer:GetComponent(typeof(UnityEngine.UI.CanvasScaler))
+    canvasContainerScale.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ConstantPixelSize
 
     -- Create left-side visualization canvas
     visualizationCanvas = util.CreateCanvas("WickyCanvasAS", 5)
@@ -156,23 +165,15 @@ execute.onloaded = function()
     visualizationCanvas.transform.eulerAngles = Vector3(0, 0, 0)
     visualizationCanvas.transform.localScale = Vector3(1, 1, 1)
 
-    -- Create right-side visualization canvas
-    rightVisualizationCanvas = util.CreateCanvas("WickyCanvasASRight", 5)
-    rightVisualizationCanvas.transform:SetParent(canvasContainer.transform, false)
-
-    local rightVisualizationCanvasC = rightVisualizationCanvas:GetComponent(typeof(UnityEngine.Canvas))
-    rightVisualizationCanvasC.renderMode = CS.UnityEngine.RenderMode.ScreenSpaceOverlay
-
-    rightVisualizationCanvas.transform.eulerAngles = Vector3(0, 180, 0)
-    rightVisualizationCanvas.transform.localScale = Vector3(1, 1, 1)
-
     for i = 0, SAMPLE_COUNT do
         spectrumData[i] = 0
     end
 
-    -- Create bars for both canvases
-    CreateBars(barNodes, visualizationCanvas, false)
-    CreateBars(rightBarNodes, rightVisualizationCanvas, true)
+    -- Create bars for the left canvas
+    CreateBars(barNodes, visualizationCanvas)
+
+    -- Create the right-side canvas and bars
+    CreateRightSideCanvas()
 end
 
 execute.update = function()
@@ -182,21 +183,16 @@ execute.update = function()
         return
     end
 
+    -- Update left visualization
     visualizationCanvas.transform.localPosition = Vector3(0, 0, 0)
-    visualizationCanvas.transform.pivot = Vector2(0.5, 0.5)
-    visualizationCanvas.transform.anchoredPosition = Vector2(300, visualizationCanvas.transform.anchoredPosition.y)
-
-    rightVisualizationCanvas.transform.localPosition = Vector3(0, 0, 0)
-    rightVisualizationCanvas.transform.pivot = Vector2(0.5, 0.5)
-    rightVisualizationCanvas.transform.anchoredPosition = Vector2(1800,
-    rightVisualizationCanvas.transform.anchoredPosition.y)
-
+    visualizationCanvas.transform.anchoredPosition = Vector2(0, visualizationCanvas.transform.anchoredPosition.y)
     local maxAmplitude = UpdateBars(true, barNodes)
     globalMaxAmplitude = Interpolate(globalMaxAmplitude, maxAmplitude, SMOOTHING_FACTOR)
     UpdateBars(false, barNodes)
 
-    maxAmplitude = UpdateBars(true, rightBarNodes)
-    globalMaxAmplitude = Interpolate(globalMaxAmplitude, maxAmplitude, SMOOTHING_FACTOR)
+    -- Update right visualization
+    rightVisualizationCanvas.transform.localPosition = Vector3(0, 0, 0)
+    rightVisualizationCanvas.transform.anchoredPosition = Vector2(WIDTH, rightVisualizationCanvas.transform.anchoredPosition.y)
     UpdateBars(false, rightBarNodes)
 end
 
