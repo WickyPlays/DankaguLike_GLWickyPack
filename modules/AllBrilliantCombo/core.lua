@@ -1,3 +1,5 @@
+--著者: Wicky
+
 local execute = {}
 execute.active = true
 

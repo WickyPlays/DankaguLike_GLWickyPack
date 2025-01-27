@@ -1,3 +1,5 @@
+--著者: Wicky
+
 local File = CS.System.IO.File
 local Directory = CS.System.IO.Directory
 local UnityEngine = CS.UnityEngine
