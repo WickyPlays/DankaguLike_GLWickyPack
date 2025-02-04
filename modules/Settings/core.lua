@@ -54,7 +54,7 @@ local function CreateButton(name, pos, size, color, text, sprite, clickListener)
     local label = GameObject(name .. "Label")
     label.transform:SetParent(btnImg.transform, false)
     buttonText = AddComponent(label, Text)
-    buttonText.text = text.text
+    buttonText.text = util.GetString(text.text)
     buttonText.font = util.GetFontJP()
     buttonText.fontSize = text.size
     buttonText.alignment = UnityEngine.TextAnchor.MiddleCenter
@@ -103,7 +103,7 @@ local function RenderSettings()
         util.SetSettings(v, "enable", newState)
 
         if modeBtn and modeBtn.buttonText and modeBtn.buttonImage then
-          modeBtn.buttonText.text = v
+          modeBtn.buttonText.text = util.GetString(v)
           modeBtn.buttonImage.sprite = newState == 1 and btnOkSprite or btnSprite
         end
 
@@ -146,7 +146,7 @@ execute.onloaded = function()
   local title = GameObject("Title")
   title.transform:SetParent(SettingsCanvas.transform, false)
   local titleText = AddComponent(title, Text)
-  titleText.text = "WickyPack 3.0.0 - Settings"
+  titleText.text = "WickyPack 3.1.0 - " .. util.GetString("Settings")
   titleText.font = util.GetFontJP()
   titleText.fontSize = 30
   titleText.alignment = UnityEngine.TextAnchor.MiddleCenter

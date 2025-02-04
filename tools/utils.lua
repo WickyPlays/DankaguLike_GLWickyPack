@@ -2,6 +2,7 @@
 
 util = {}
 
+local dkjson = require("tools//dkjson.lua")
 local UnityEngine = CS.UnityEngine
 local GameObject = UnityEngine.GameObject
 local Vector2 = UnityEngine.Vector2
@@ -13,6 +14,7 @@ local Input = UnityEngine.Input
 local Resources = UnityEngine.Resources
 local Font = UnityEngine.Font
 local Path = CS.System.IO.Path
+local File = CS.System.IO.File
 local WickyCanvas = nil
 local width = SCREENMAN:GetScreenWidth()
 local height = SCREENMAN:GetScreenHeight()
@@ -23,6 +25,9 @@ local ini_parser = nil
 local parentDir = nil
 local settings = nil
 local settingsDir = nil
+local lang = "en" --default
+
+local stringList = {}
 
 util.GetScreenWidth = function()
 	return width
@@ -30,6 +35,24 @@ end
 
 util.GetScreenHeight = function()
 	return height
+end
+
+util.SetLanguage = function(language)
+	lang = language
+	local langFile = parentDir .. "lang\\" .. lang .. ".json"
+	stringList = dkjson.decode(File.ReadAllText(langFile))
+end
+
+util.GetLanguage = function()
+	return lang
+end
+
+util.GetStringList = function()
+	return stringList
+end
+
+util.GetString = function(key)
+	return stringList[key]
 end
 
 util.GetCanvas = function()

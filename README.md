@@ -1,12 +1,12 @@
 [English | [日本語](README.jp.md)]
 
-Welcome to WickyPack for DankaguLike!!!
+Welcome to DankaguLike's WickyPack!!!!!!
 
-Version 3.0.0
+Version: 3.1.0
 
 [https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
 
-Setting file: `settings.ini`
+Settings: `settings.ini`
 
 ## About DankaguLike
 

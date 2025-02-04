@@ -74,6 +74,11 @@ function onloaded()
 
 	util.InsertParentDir(parentDir)
 	util.InsertSettings(ini_parser, settingsDir)
+
+	--Set language
+	local lang = settings["Language"].language
+	util.SetLanguage(lang)
+
 	loadAllScripts()
 
 	for i = 1, #scripts do

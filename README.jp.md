@@ -1,3 +1,9 @@
 [[English](README.md) | 日本語]
 
-近日公開...
+ダンカグライクのWickyPackにようこそ!!!!!!
+
+バージョン: 3.1.0
+
+[https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
+
+設定変更: `settings.ini`
