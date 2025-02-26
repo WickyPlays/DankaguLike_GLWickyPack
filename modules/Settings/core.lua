@@ -146,7 +146,7 @@ execute.onloaded = function()
   local title = GameObject("Title")
   title.transform:SetParent(SettingsCanvas.transform, false)
   local titleText = AddComponent(title, Text)
-  titleText.text = "WickyPack 3.1.0 - " .. util.GetString("Settings")
+  titleText.text = "WickyPack 3.1.1 - " .. util.GetString("Settings")
   titleText.font = util.GetFontJP()
   titleText.fontSize = 30
   titleText.alignment = UnityEngine.TextAnchor.MiddleCenter
