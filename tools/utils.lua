@@ -39,7 +39,12 @@ end
 
 util.SetLanguage = function(language)
 	lang = language
-	local langFile = parentDir .. "lang\\" .. lang .. ".json"
+	local langFile
+	if util.IsPlatformMobile then
+		langFile = parentDir .. "lang/" .. lang .. ".json"
+	else
+		langFile = parentDir .. "lang\\" .. lang .. ".json"
+	end
 	stringList = dkjson.decode(File.ReadAllText(langFile))
 end
 
@@ -67,7 +72,6 @@ util.GetCanvas = function()
 		WickyCanvasScale.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize
 		WickyCanvasScale.referenceResolution = Vector2(1920, 1080)
 		WickyCanvasScale.matchWidthOrHeight = 1
-
 	end
 	return WickyCanvas
 end
@@ -92,14 +96,14 @@ end
 util.GetFontJP = function()
 	local obj = Resources.FindObjectsOfTypeAll(typeof(Material))
 	local textObj = Resources.FindObjectsOfTypeAll(typeof(Font))
-	
+
 	--Load material
-	for i=0,obj.Length - 1 do
+	for i = 0, obj.Length - 1 do
 		if obj[i].name == "Font Material" then FontMat = obj[i] end
 	end
-	
+
 	--Load font Japanese
-	for i=0,textObj.Length - 1 do
+	for i = 0, textObj.Length - 1 do
 		if textObj[i].name == "NotoSansJP-Bold" then
 			FontJP = textObj[i]
 			break
@@ -127,7 +131,7 @@ end
 
 util.GetModules = function()
 	local newModules = {}
-	for _,v in pairs(util.GetModulesDir()) do
+	for _, v in pairs(util.GetModulesDir()) do
 		table.insert(newModules, Path.GetFileNameWithoutExtension(v))
 	end
 
@@ -168,7 +172,7 @@ util.ColorRGBA = function(r, g, b, a)
 end
 
 util.ColorHexToRGBA = function(hexValue, alpha)
-	hexValue = hexValue:gsub("#","")
+	hexValue = hexValue:gsub("#", "")
 	local r = tonumber(hexValue:sub(1, 2), 16)
 	local g = tonumber(hexValue:sub(3, 4), 16)
 	local b = tonumber(hexValue:sub(5, 6), 16)
@@ -223,7 +227,7 @@ util.LoadObjectHash = function(hash, item)
 	return ASSETMAN:LoadGameObject(hash, item)
 end
 
-util.bump = function ()
+util.bump = function()
 	SCREENMAN:SystemMessage("Bump!")
 end
 
