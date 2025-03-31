@@ -2,7 +2,7 @@
 
 ダンカグライクのWickyPackにようこそ!!!!!!
 
-バージョン: 3.1.1
+バージョン: 3.2.0
 
 [https://github.com/WickyPlays/DankaguLike_GLWickyPack](https://github.com/WickyPlays/DankaguLike_GLWickyPack)
 
