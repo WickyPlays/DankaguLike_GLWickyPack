@@ -25,6 +25,7 @@ This is a Global Lua modpack scripts reserved for extra functionalities for Dank
 + DamageTint: allows visible damage tint to players when they miss notes.
 + Difficulty: allows viewing difficulty note at bottom right of screen.
 + JudgeViewer: allows users to view note judgements (Brillant, Great, Good, Bad, Miss) directly in the gameplay rather than result screen.
++ NoteCount: allows viewing note number (only used for debug, impractical in gameplay).
 + NoteEffect: adding cool note effects whether player successfully hit notes.
 + NoteMissVibration: allow phone vibration upon missing a note.
 + SongTitle: allows viewing song title at bottom left of screen.
