@@ -16,8 +16,8 @@ execute.onloaded = function()
 	local effectType = execute.GetOption("TYPE") or 1
 	local maxAlpha = execute.GetOption("MAX_ALPHA") or 1
 	local hexTapNote = execute.GetOption("TAP_NOTE_COLOR") or "#FFC500"
-	local hexLongNote = execute.GetOption("LONG_NOTE_COLOR") or "#00FF03"
-	local hexFuzzyNote = execute.GetOption("FUZZY_NOTE_COLOR") or "#00EEFF"
+	local hexLongNote = execute.GetOption("LONG_NOTE_COLOR") or "#00D6FF"
+	local hexFuzzyNote = execute.GetOption("FUZZY_NOTE_COLOR") or "#00FF20"
 
 	_LaneColors[1] = hexTapNote
 	_LaneColors[2] = hexLongNote
