@@ -1,5 +1,10 @@
 [English | [日本語](README.jp.md)]
 
+> [!CAUTION]
+> Note: As of 31th Jan 2026, DankaguLike has been deemed End of Service. You can however play it offline, just that there will be no more updates regarding this game.
+> 
+> The following above also means there will be no more updates for WickyPack. You can however still download this extension and play it.
+
 Welcome to DankaguLike's WickyPack!!!!!!
 
 Version: 3.3.0
