@@ -3,7 +3,7 @@
 > [!CAUTION]
 > Note: As of 31th Jan 2026, DankaguLike has been deemed End of Service. You can however play it offline, just that there will be no more updates regarding this game.
 > 
-> The following above also means there will be no more updates for WickyPack. You can however still download this extension and play it.
+> The following above also means there will be no more updates for WickyPack. You can however still download this extension and play with it.
 
 Welcome to DankaguLike's WickyPack!!!!!!
 
